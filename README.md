@@ -17,20 +17,28 @@ Create a new project, or update an existing one. Then:
 
 This will run your build with [this image](https://hub.docker.com/r/tdmalone/codebuild-docker-node/), which is built from this current repo.
 
-## Building locally
+## Running locally
+
+If you want to run without having to build it:
+
+    docker run --interactive --privileged --tty tdmalone/codebuild-docker-node bash
+
+That will download and start the container, running the `bash` shell.
+
+Otherwise, to build it yourself:
 
 * Run `git clone https://github.com/tdmalone/codebuild-docker-node.git` to download this repository to your local machine.
-* Run `docker build --tag codebuild-docker-node .` to build Docker image locally.
-* Once succeeded, your can run `docker run --interactive --tty codebuild-docker-node bash` to start container running the `bash` shell.
+* Run `docker build --tag codebuild-docker-node .` to build the Docker image locally.
+* Once succeeded, you can then run `docker run --interactive --privileged --tty codebuild-docker-node bash` to start the container in a `bash` shell.
 
 You can see the [docker build](https://docs.docker.com/engine/reference/commandline/build/) and [docker run](https://docs.docker.com/engine/reference/commandline/run/) references for more.
 
 ## Changes from the originals
 
-Based on the Docker 17.09 file, this file:
+Based on [CodeBuild's Docker 17.09 file](https://github.com/aws/aws-codebuild-docker-images/blob/master/ubuntu/docker/17.09.0/Dockerfile), this repo:
 
 * removes the Python installation
-* removes the installation of `libmysqlclient-dev=5.5.58-*` due to **E: Version '5.5.58-*' for 'libmysqlclient-dev' was not found**
+* removes the installation of `libmysqlclient-dev=5.5.58-*` due to error **E: Version '5.5.58-*' for 'libmysqlclient-dev' was not found**
 * adds the Node 6.3.1 installation
 
 ## License
